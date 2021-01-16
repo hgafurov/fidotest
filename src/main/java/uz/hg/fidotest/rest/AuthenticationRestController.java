@@ -47,15 +47,23 @@ public class AuthenticationRestController {
 					login, requestDto.getPassword()));
 			User user = userService.findByLogin(login);
 			if (user == null) {
-				throw new UsernameNotFoundException("Login <" + login + "> nomli foydalanuvchi topilmadi");
+				Map<Object, Object> response = new HashMap<>();
+				response.put("error", "Invalid username and password");
+				response.put("msg", "Login yoki parol noto'gri.");
+				return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+				//throw new UsernameNotFoundException("Login <" + login + "> nomli foydalanuvchi topilmadi");
 			}
 			String token = tokenProvider.createToken(login, user.getRoles());
 			Map<Object, Object> response = new HashMap<>();
-			response.put("login", login);
-			response.put("token", token);
+			//response.put("login", login);
+			response.put("token", "Bearer "+token);
 			return ResponseEntity.ok(response);
 		} catch (AuthenticationException e) {
-			throw new BadCredentialsException("Invalid login or password");
+			Map<Object, Object> response = new HashMap<>();
+			response.put("error", "Invalid username and password");
+			response.put("msg", "Login yoki parol noto'gri.");
+			return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+			//throw new BadCredentialsException("Invalid login or password");
 		}
 	}
 	
@@ -66,7 +74,7 @@ public class AuthenticationRestController {
 			Map<Object, Object> response = new HashMap<>();
 			response.put("error", "Invalid password");
 			response.put("msg", "Пароль не совпадает. Введите точнее.");
-			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);		
+			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);		
 		}
 		
 		if (userService.checkLogin(newUser.getLogin())) {
