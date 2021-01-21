@@ -7,6 +7,7 @@ import uz.hg.fidotest.model.User;
 public interface UserService {
 
 	User register(User user);
+	User save(User user);
 	List<User> getAll();
 	User findByLogin(String login);
 	User findById(Long id);

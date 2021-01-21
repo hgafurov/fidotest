@@ -72,5 +72,11 @@ public class UserServiceImpl implements UserService{
 		return (1 == userRepository.countLogin(login));
 	}
 
+	@Override
+	public User save(User user) {
+		User updatedUser = userRepository.save(user);
+		return updatedUser;
+	}
+
 	
 }

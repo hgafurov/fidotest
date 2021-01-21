@@ -25,7 +25,7 @@ public class JWTFilter extends GenericFilterBean{
 			throws IOException, ServletException {
 		
 		String token = tokenProvider.resolveToken((HttpServletRequest) request);
-		
+		System.out.println("====="+ token);
 		if (token != null && tokenProvider.validateToken(token)) {
 			Authentication authentication = tokenProvider.getAuthentication(token);
 			if (authentication != null) {

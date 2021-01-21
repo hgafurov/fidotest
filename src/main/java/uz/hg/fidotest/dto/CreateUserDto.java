@@ -1,5 +1,7 @@
 package uz.hg.fidotest.dto;
 
+import uz.hg.fidotest.model.User;
+
 public class CreateUserDto extends UserDto {
 	
 	private String password1;
@@ -23,5 +25,5 @@ public class CreateUserDto extends UserDto {
 	public void setPassword2(String password2) {
 		this.password2 = password2;
 	}
-		
+
 }

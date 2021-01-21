@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import uz.hg.fidotest.dto.AuthenticationRequestDTO;
 import uz.hg.fidotest.dto.CreateUserDto;
+import uz.hg.fidotest.dto.TokenDto;
 import uz.hg.fidotest.dto.UserDto;
 import uz.hg.fidotest.model.User;
 import uz.hg.fidotest.security.jwt.TokenProvider;
@@ -91,7 +90,28 @@ public class AuthenticationRestController {
 		return new ResponseEntity<>(userDto, HttpStatus.OK);
 	}
 	
+	@PostMapping("guser")
+	public ResponseEntity<?> getUser(@RequestBody TokenDto tokenDto) {
+		System.out.println("Token = " + tokenDto.getToken());
+		UserDto userDto = UserDto.fromUser(userService.findByLogin(tokenProvider.getLogin(tokenDto.getTokentFresh())));
+		return new ResponseEntity<>(userDto, HttpStatus.OK);
+	}
 	
-	
+	@PostMapping("update-user")
+	public ResponseEntity<?> updateUser(@RequestBody CreateUserDto updateUser) {
+				
+		User user = userService.findByLogin(updateUser.getLogin());
+		if (user != null) {
+			user.setFamiliya(updateUser.getFamiliya());
+			user.setImya(updateUser.getImya());
+			user.setEmail(updateUser.getEmail());
+			UserDto userDto = UserDto.fromUser(userService.save(user));
+			return new ResponseEntity<>(userDto, HttpStatus.OK);
+		}
+		Map<Object, Object> response = new HashMap<>();
+		response.put("warn", "User saqlanmadi");
+		response.put("msg", "Userni saqlash omadsiz yakunlandi");
+		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST );					
+	}
 
 }
