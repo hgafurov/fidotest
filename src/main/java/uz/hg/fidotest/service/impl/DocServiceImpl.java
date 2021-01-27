@@ -3,11 +3,13 @@ package uz.hg.fidotest.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import uz.hg.fidotest.model.Doc;
 import uz.hg.fidotest.repository.DocRepository;
 import uz.hg.fidotest.service.DocService;
 
+@Service
 public class DocServiceImpl implements DocService {
 
 	private final DocRepository docRepository;

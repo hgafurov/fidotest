@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "roles")
 public class Role extends BaseEntity{
@@ -29,6 +31,7 @@ public class Role extends BaseEntity{
 		this.name = name;
 	}
 
+	@JsonIgnore
 	public List<User> getRoles() {
 		return users;
 	}
