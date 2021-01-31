@@ -10,6 +10,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity{
@@ -46,6 +48,7 @@ public class User extends BaseEntity{
 		this.login = login;
 	}
 	
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
