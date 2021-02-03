@@ -80,14 +80,20 @@ public class DocRestController {
 	}
 	
 	@PostMapping("update")
-	public ResponseEntity<?> updateUser(@RequestBody  Doc doc) {
+	public ResponseEntity<?> updateDoc(@RequestBody  Doc doc) {
 		Doc uDoc = docService.save(doc);	
 		if (uDoc != null) {
 			return new ResponseEntity<>(uDoc, HttpStatus.OK);
 		}
 		Map<Object, Object> response = new HashMap<>();
-		response.put("warn", "User saqlanmadi");
-		response.put("msg", "Userni saqlash omadsiz yakunlandi");
+		response.put("warn", "Hujjat saqlanmadi");
+		response.put("msg", "Hujjatni saqlash omadsiz yakunlandi");
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST );					
+	}
+	
+	@GetMapping("delete/{id}")
+	public ResponseEntity<?> deleteDoc(@PathVariable Long id) {
+		docService.delete(id);	
+		return new ResponseEntity<>(HttpStatus.OK);				
 	}
 }

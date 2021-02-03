@@ -82,7 +82,7 @@ public class FileUploadRestController {
 
             byte[]bytes = file.getBytes();
             fileName = file.getOriginalFilename();
-            Path path = Paths.get("fidofiles\\" + fileName);
+            Path path = Paths.get("fidofiles/" + fileName);
             Files.write(path, bytes);
 
         }
