@@ -12,4 +12,7 @@ public interface DocService {
 	Doc findByRegNo(String regNo);
 	Doc findById(Long id);
 	void delete(Long id);
+	List<Doc> task2();
+	List<Doc> task3();
+	List<Doc> task4();
 }

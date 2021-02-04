@@ -55,8 +55,8 @@ public class DocRestController {
 		List<Doc> docs = docService.getAll();
 		if (docs == null) {
 			Map<Object, Object> response = new HashMap<>();
-			response.put("warn", "Doc saqlanmadi");
-			response.put("msg", "Docni saqlash omadsiz yakunlandi");
+			response.put("warn", "Doc topilmadi");
+			response.put("msg", "So'rov bo'yicha hujjarlar topilmadi");
 			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST );
 		}
 		
@@ -95,5 +95,44 @@ public class DocRestController {
 	public ResponseEntity<?> deleteDoc(@PathVariable Long id) {
 		docService.delete(id);	
 		return new ResponseEntity<>(HttpStatus.OK);				
+	}
+
+	@GetMapping("task2")
+	public ResponseEntity<?> task2() {
+		List<Doc> docs = docService.task2();
+		if (docs == null) {
+			Map<Object, Object> response = new HashMap<>();
+			response.put("warn", "Doc topilmadi");
+			response.put("msg", "So'rov bo'yicha hujjarlar topilmadi");
+			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST );
+		}
+		
+		return new ResponseEntity<>(docs, HttpStatus.OK);					
+	}
+	
+	@GetMapping("task3")
+	public ResponseEntity<?> task3() {
+		List<Doc> docs = docService.task3();
+		if (docs == null) {
+			Map<Object, Object> response = new HashMap<>();
+			response.put("warn", "Doc topilmadi");
+			response.put("msg", "So'rov bo'yicha hujjarlar topilmadi");
+			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST );
+		}
+		
+		return new ResponseEntity<>(docs, HttpStatus.OK);					
+	}
+	
+	@GetMapping("task4")
+	public ResponseEntity<?> task4() {
+		List<Doc> docs = docService.task4();
+		if (docs == null) {
+			Map<Object, Object> response = new HashMap<>();
+			response.put("warn", "Doc topilmadi");
+			response.put("msg", "So'rov bo'yicha hujjarlar topilmadi");
+			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST );
+		}
+		
+		return new ResponseEntity<>(docs, HttpStatus.OK);					
 	}
 }

@@ -41,6 +41,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 			.antMatchers("/api/v1/download").permitAll() // vaqtincha
 			.antMatchers("/api/v1/doc/save-doc").permitAll() // vaqtincha
 			.antMatchers("/api/v1/doc/get-all").permitAll() // vaqtincha
+			.antMatchers("/api/v1/doc/task2").permitAll() // vaqtincha
+			.antMatchers("/api/v1/doc/task3").permitAll() // vaqtincha
+			.antMatchers("/api/v1/doc/task4").permitAll() // vaqtincha
 			.antMatchers("/api/v1/admin/").hasRole("Admin")
 			.anyRequest().authenticated()
 			.and()
