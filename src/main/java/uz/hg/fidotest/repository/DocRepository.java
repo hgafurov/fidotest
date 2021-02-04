@@ -18,6 +18,6 @@ public interface DocRepository extends JpaRepository<Doc, Long>{
 	@Query("SELECT d FROM Doc d WHERE NOT (d.formaDostav='Курьер' AND d.correspondent='ГНИ') AND d.regDate BETWEEN :d1 AND :d2")
 	List<Doc> task3(Date d1, Date d2);
 
-	@Query("SELECT d FROM Doc d WHERE d.correspondent='ТСЖ' AND (d.regDate BETWEEN :d1 AND :d2) AND NOT (UPPER(d.tema) LIKE '%КРЕДИТ%' OR UPPER(d.tema) LIKE '%KREDIT%')")
+	@Query("SELECT d FROM Doc d WHERE (d.correspondent='ТСЖ' AND (d.regDate BETWEEN :d1 AND :d2)) AND (NOT (UPPER(d.tema) LIKE '%КРЕДИТ%' OR UPPER(d.tema) LIKE '%KREDIT%'))")
 	List<Doc> task4(Date d1, Date d2);
 }

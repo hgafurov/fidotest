@@ -7,12 +7,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-
 import uz.hg.fidotest.security.jwt.JWTConfigurer;
 import uz.hg.fidotest.security.jwt.TokenProvider;
 
 @Configuration
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	private final TokenProvider tokenProvider;
 
@@ -31,23 +30,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.httpBasic().disable()
-			.csrf().disable()
+			.csrf().disable().cors().and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 			.authorizeRequests()
 			.antMatchers("/api/v1/auth/login").permitAll()
 			.antMatchers("/api/v1/auth/create-user").permitAll()
-			.antMatchers("/api/v1/upload").permitAll() // vaqtincha
-			.antMatchers("/api/v1/download").permitAll() // vaqtincha
-			.antMatchers("/api/v1/doc/save-doc").permitAll() // vaqtincha
-			.antMatchers("/api/v1/doc/get-all").permitAll() // vaqtincha
-			.antMatchers("/api/v1/doc/task2").permitAll() // vaqtincha
-			.antMatchers("/api/v1/doc/task3").permitAll() // vaqtincha
-			.antMatchers("/api/v1/doc/task4").permitAll() // vaqtincha
+			//.antMatchers("/api/v1/upload").permitAll() // vaqtincha
+			//.antMatchers("/api/v1/download").permitAll() // vaqtincha
+			//.antMatchers("/api/v1/doc/save-doc").permitAll() // vaqtincha
+			//.antMatchers("/api/v1/doc/get-all").permitAll() // vaqtincha
+			//.antMatchers("/api/v1/doc/task2").permitAll() // vaqtincha
+			//.antMatchers("/api/v1/doc/task3").permitAll() // vaqtincha
+			//.antMatchers("/api/v1/doc/task4").permitAll() // vaqtincha
 			.antMatchers("/api/v1/admin/").hasRole("Admin")
 			.anyRequest().authenticated()
 			.and()
 			.apply(new JWTConfigurer(tokenProvider));
 	}
-		
+	
 }
