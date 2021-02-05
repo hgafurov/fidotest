@@ -1,7 +1,5 @@
 package uz.hg.fidotest.dto;
 
-import uz.hg.fidotest.model.User;
-
 public class CreateUserDto extends UserDto {
 	
 	private String password1;

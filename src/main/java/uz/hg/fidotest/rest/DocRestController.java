@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import uz.hg.fidotest.dto.CreateUserDto;
-import uz.hg.fidotest.dto.UserDto;
 import uz.hg.fidotest.model.Doc;
-import uz.hg.fidotest.model.User;
 import uz.hg.fidotest.service.DocService;
 
 @RestController
@@ -51,9 +48,7 @@ public class DocRestController {
 	
 	@GetMapping("get-all")
 	public ResponseEntity<?> docs(){
-		
-		// Bu erda Doc validation bo'lishi kerak
-		
+			
 		List<Doc> docs = docService.getAll();
 		if (docs == null) {
 			Map<Object, Object> response = new HashMap<>();
@@ -67,9 +62,7 @@ public class DocRestController {
 	
 	@GetMapping("get/{id}")
 	public ResponseEntity<?> getById(@PathVariable Long id){
-		
-		// Bu erda Doc validation bo'lishi kerak
-		
+				
 		Doc doc = docService.findById(id);
 		if (doc == null) {
 			Map<Object, Object> response = new HashMap<>();
